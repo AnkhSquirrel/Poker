@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="HandTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-01-28T11:26:18" hostname="DESKTOP-TT3CIU5" time="0.008">
+  <properties/>
+  <testcase name="compareTo()" classname="HandTest" time="0.008"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
