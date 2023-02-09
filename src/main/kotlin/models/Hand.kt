@@ -9,66 +9,64 @@ import STRAIGHT
 import STRAIGHT_FLUSH
 import THREE_OF_A_KIND
 import TWO_PAIRS
+import kotlin.math.pow
 
-class Hand(draw: List<Card>) : Comparable<Hand> {
+class Hand : Comparable<Hand> {
 
-    val cardsInHand: List<Card> = draw.sorted()
-    private val rankRecurrenceMap: Map<Int, Int> = cardsInHand.groupingBy { it.rank.second }.eachCount()
-    val score: Int = calculateScore()
-    private val comparableRanks: List<Int> = findComparableRanks()
+    val cards: List<Card>
+    private val rankRecurrenceMap: Map<Int, Int>
+    private val score: Int
+    private val comparableRanks: Int
+
+    constructor() {
+        cards = emptyList()
+        rankRecurrenceMap = cards.groupingBy { it.rank.second }.eachCount()
+        score = calculateScore()
+        comparableRanks = findComparableRanks()
+    }
+
+    constructor(vararg draw: Card) {
+        cards = draw.sorted()
+        rankRecurrenceMap = cards.groupingBy { it.rank.second }.eachCount()
+        score = calculateScore()
+        comparableRanks = findComparableRanks()
+    }
 
     private fun calculateScore(): Int {
         return when {
-            hasStraightFlush() -> STRAIGHT_FLUSH.second
-            hasFourOfAKind() -> FOUR_OF_A_KIND.second
-            hasFull() -> FULL.second
-            hasFlush() -> FLUSH.second
-            hasStraight() -> STRAIGHT.second
-            hasThreeOfAKind() -> THREE_OF_A_KIND.second
-            hasTwoPairs() -> TWO_PAIRS.second
-            hasPair() -> PAIR.second
-            else -> HIGH_CARD.second
-        }
+            hasStraightFlush() -> STRAIGHT_FLUSH
+            hasFourOfAKind() -> FOUR_OF_A_KIND
+            hasFull() -> FULL
+            hasFlush() -> FLUSH
+            hasStraight() -> STRAIGHT
+            hasThreeOfAKind() -> THREE_OF_A_KIND
+            hasTwoPairs() -> TWO_PAIRS
+            hasPair() -> PAIR
+            else -> HIGH_CARD
+        }.second
     }
 
-    private fun findComparableRanks(): List<Int> {
+    private fun findComparableRanks(): Int {
         return when (score) {
             STRAIGHT_FLUSH.second,
-            STRAIGHT.second -> listOf(cardsInHand.last().rank.second)
-
-            FOUR_OF_A_KIND.second -> listOf(rankRecurrenceMap.filterValues { it == 4 }.keys.first())
-
-            FULL.second -> listOf(rankRecurrenceMap.filterValues { it == 3 }.keys.first())
-
+            STRAIGHT.second -> cards.last().rank.second
+            FOUR_OF_A_KIND.second -> rankRecurrenceMap.filterValues { it == 4 }.keys.first()
+            FULL.second -> rankRecurrenceMap.filterValues { it == 3 }.keys.first()
             FLUSH.second,
-            HIGH_CARD.second -> cardsInHand.groupingBy { it.rank.second }.eachCount().keys.sortedDescending()
-
-            THREE_OF_A_KIND.second -> listOf(rankRecurrenceMap.filterValues { it == 3 }.keys.first())
-
-            TWO_PAIRS.second -> {
-                rankRecurrenceMap.filterValues { it == 2 }.keys.sortedDescending() +
-                        listOf(rankRecurrenceMap.filterValues { it == 1 }.keys.first())
-            }
-
-            PAIR.second -> {
-                listOf(rankRecurrenceMap.filterValues { it == 2 }.keys.first()) +
-                        rankRecurrenceMap.filterValues { it == 1 }.keys.sortedDescending()
-            }
-
-            else -> {
-                listOf(0)
-            }
+            HIGH_CARD.second -> comparableArrayToInt(*cards.groupingBy { it.rank.second }.eachCount().keys.sortedDescending().toIntArray())
+            THREE_OF_A_KIND.second -> rankRecurrenceMap.filterValues { it == 3 }.keys.first()
+            TWO_PAIRS.second -> comparableArrayToInt(*rankRecurrenceMap.filterValues { it == 2 }.keys.sortedDescending().toIntArray(), rankRecurrenceMap.filterValues { it == 1 }.keys.first())
+            PAIR.second -> comparableArrayToInt(rankRecurrenceMap.filterValues { it == 2 }.keys.first(), *rankRecurrenceMap.filterValues { it == 1 }.keys.sortedDescending().toIntArray())
+            else -> 0
         }
     }
 
-    private fun getWinnerOfEqualHands(thisComparableRanks: List<Int>, otherComparableRanks: List<Int>): Int {
-        comparableRanks.indices.forEach { i ->
-            when {
-                thisComparableRanks[i] > otherComparableRanks[i] -> return 1
-                thisComparableRanks[i] < otherComparableRanks[i] -> return -1
-            }
+    private fun comparableArrayToInt(vararg array: Int): Int {
+        var comp = 0
+        array.reversed().forEachIndexed { index, number ->
+            comp += number * 15.0.pow(index).toInt()
         }
-        return 0
+        return comp
     }
 
     private fun hasStraightFlush(): Boolean {
@@ -84,11 +82,11 @@ class Hand(draw: List<Card>) : Comparable<Hand> {
     }
 
     private fun hasFlush(): Boolean {
-        return cardsInHand.groupingBy { it.suit }.eachCount().size == 1
+        return cards.groupingBy { it.suit }.eachCount().size == 1
     }
 
     private fun hasStraight(): Boolean {
-        return (1 until cardsInHand.size).none { cardsInHand[it].rank.second != cardsInHand[0].rank.second + it }
+        return (1 until cards.size).none { cards[it].rank.second != cards[0].rank.second + it }
     }
 
     private fun hasThreeOfAKind(): Boolean {
@@ -103,12 +101,11 @@ class Hand(draw: List<Card>) : Comparable<Hand> {
         return rankRecurrenceMap.filterValues { it == 2 }.size == 1
     }
 
-    override operator fun compareTo(other: Hand): Int {
-        return when {
-            this.score > other.score -> 1
-            this.score < other.score -> -1
-            else -> getWinnerOfEqualHands(this.comparableRanks, other.comparableRanks)
-        }
+    override fun compareTo(other: Hand): Int {
+        return compareValuesBy(this, other,
+            { it.score },
+            { it.comparableRanks }
+        )
     }
 
     override fun equals(other: Any?): Boolean {

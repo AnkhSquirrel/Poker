@@ -7,304 +7,247 @@ import org.junit.jupiter.api.Assertions.*
 class HandTest {
 
     private val equalStraightFlush1 = Hand(
-        listOf(
-            Card(HEARTS, SIX),
-            Card(HEARTS, FIVE),
-            Card(HEARTS, FOUR),
-            Card(HEARTS, THREE),
-            Card(HEARTS, TWO)
-        )
+        Card(HEARTS, SIX),
+        Card(HEARTS, FIVE),
+        Card(HEARTS, FOUR),
+        Card(HEARTS, THREE),
+        Card(HEARTS, TWO)
     )
 
     private val equalStraightFlush2 = Hand(
-        listOf(
-            Card(CLUBS, SIX),
-            Card(CLUBS, FIVE),
-            Card(CLUBS, FOUR),
-            Card(CLUBS, THREE),
-            Card(CLUBS, TWO)
-        )
+        Card(CLUBS, SIX),
+        Card(CLUBS, FIVE),
+        Card(CLUBS, FOUR),
+        Card(CLUBS, THREE),
+        Card(CLUBS, TWO)
     )
 
+
     private val highStraightFlush = Hand(
-        listOf(
-            Card(HEARTS, KING),
-            Card(HEARTS, QUEEN),
-            Card(HEARTS, JACK),
-            Card(HEARTS, TEN),
-            Card(HEARTS, NINE)
-        )
+        Card(HEARTS, KING),
+        Card(HEARTS, QUEEN),
+        Card(HEARTS, JACK),
+        Card(HEARTS, TEN),
+        Card(HEARTS, NINE)
     )
 
     private val lowStraightFlush = Hand(
-        listOf(
-            Card(HEARTS, SIX),
-            Card(HEARTS, FIVE),
-            Card(HEARTS, FOUR),
-            Card(HEARTS, THREE),
-            Card(HEARTS, TWO)
-        )
+        Card(HEARTS, SIX),
+        Card(HEARTS, FIVE),
+        Card(HEARTS, FOUR),
+        Card(HEARTS, THREE),
+        Card(HEARTS, TWO)
     )
 
     private val highFourOfAKind = Hand(
-        listOf(
-            Card(HEARTS, TEN),
-            Card(SPADES, TEN),
-            Card(CLUBS, TEN),
-            Card(DIAMONDS, TEN),
-            Card(HEARTS, SEVEN)
-        )
+
+        Card(HEARTS, TEN),
+        Card(SPADES, TEN),
+        Card(CLUBS, TEN),
+        Card(DIAMONDS, TEN),
+        Card(HEARTS, SEVEN)
+
     )
 
     private val lowFourOfAKind = Hand(
-        listOf(
-            Card(HEARTS, FIVE),
-            Card(SPADES, FIVE),
-            Card(CLUBS, FIVE),
-            Card(DIAMONDS, FIVE),
-            Card(HEARTS, ACE)
+        Card(HEARTS, FIVE),
+        Card(SPADES, FIVE),
+        Card(CLUBS, FIVE),
+        Card(DIAMONDS, FIVE),
+        Card(HEARTS, ACE)
 
-        )
     )
 
     private val highFull = Hand(
-        listOf(
-            Card(HEARTS, TEN),
-            Card(SPADES, TEN),
-            Card(CLUBS, TEN),
-            Card(DIAMONDS, SEVEN),
-            Card(HEARTS, SEVEN)
-        )
+        Card(HEARTS, TEN),
+        Card(SPADES, TEN),
+        Card(CLUBS, TEN),
+        Card(DIAMONDS, SEVEN),
+        Card(HEARTS, SEVEN)
     )
 
     private val lowFull = Hand(
-        listOf(
-            Card(HEARTS, FIVE),
-            Card(SPADES, FIVE),
-            Card(CLUBS, FIVE),
-            Card(HEARTS, QUEEN),
-            Card(DIAMONDS, QUEEN)
-        )
+        Card(HEARTS, FIVE),
+        Card(SPADES, FIVE),
+        Card(CLUBS, FIVE),
+        Card(HEARTS, QUEEN),
+        Card(DIAMONDS, QUEEN)
     )
 
     private val equalFlush1 = Hand(
-        listOf(
-            Card(HEARTS, TEN),
-            Card(HEARTS, EIGHT),
-            Card(HEARTS, SEVEN),
-            Card(HEARTS, FIVE),
-            Card(HEARTS, TWO)
-        )
+        Card(HEARTS, TEN),
+        Card(HEARTS, EIGHT),
+        Card(HEARTS, SEVEN),
+        Card(HEARTS, FIVE),
+        Card(HEARTS, TWO)
     )
 
     private val equalFlush2 = Hand(
-        listOf(
-            Card(DIAMONDS, TEN),
-            Card(DIAMONDS, EIGHT),
-            Card(DIAMONDS, SEVEN),
-            Card(DIAMONDS, FIVE),
-            Card(DIAMONDS, TWO)
-        )
+        Card(DIAMONDS, TEN),
+        Card(DIAMONDS, EIGHT),
+        Card(DIAMONDS, SEVEN),
+        Card(DIAMONDS, FIVE),
+        Card(DIAMONDS, TWO)
     )
 
     private val highFlush = Hand(
-        listOf(
-            Card(HEARTS, KING),
-            Card(HEARTS, TEN),
-            Card(HEARTS, SEVEN),
-            Card(HEARTS, THREE),
-            Card(HEARTS, TWO)
-        )
+        Card(HEARTS, KING),
+        Card(HEARTS, TEN),
+        Card(HEARTS, SEVEN),
+        Card(HEARTS, THREE),
+        Card(HEARTS, TWO)
     )
 
     private val lowFlush = Hand(
-        listOf(
-            Card(SPADES, JACK),
-            Card(SPADES, EIGHT),
-            Card(SPADES, SIX),
-            Card(SPADES, FIVE),
-            Card(SPADES, THREE)
-        )
+        Card(SPADES, JACK),
+        Card(SPADES, EIGHT),
+        Card(SPADES, SIX),
+        Card(SPADES, FIVE),
+        Card(SPADES, THREE)
     )
 
     private val equalStraight1 = Hand(
-        listOf(
-            Card(HEARTS, KING),
-            Card(CLUBS, QUEEN),
-            Card(HEARTS, JACK),
-            Card(DIAMONDS, TEN),
-            Card(HEARTS, NINE)
-        )
+        Card(HEARTS, KING),
+        Card(CLUBS, QUEEN),
+        Card(HEARTS, JACK),
+        Card(DIAMONDS, TEN),
+        Card(HEARTS, NINE)
     )
 
     private val equalStraight2 = Hand(
-        listOf(
-            Card(SPADES, KING),
-            Card(HEARTS, QUEEN),
-            Card(DIAMONDS, JACK),
-            Card(HEARTS, TEN),
-            Card(SPADES, NINE)
-        )
+        Card(SPADES, KING),
+        Card(HEARTS, QUEEN),
+        Card(DIAMONDS, JACK),
+        Card(HEARTS, TEN),
+        Card(SPADES, NINE)
     )
 
     private val highStraight = Hand(
-        listOf(
-            Card(HEARTS, KING),
-            Card(CLUBS, QUEEN),
-            Card(HEARTS, JACK),
-            Card(DIAMONDS, TEN),
-            Card(HEARTS, NINE)
-        )
+        Card(HEARTS, KING),
+        Card(CLUBS, QUEEN),
+        Card(HEARTS, JACK),
+        Card(DIAMONDS, TEN),
+        Card(HEARTS, NINE)
     )
 
     private val lowStraight = Hand(
-        listOf(
-            Card(SPADES, JACK),
-            Card(HEARTS, TEN),
-            Card(DIAMONDS, NINE),
-            Card(HEARTS, EIGHT),
-            Card(CLUBS, SEVEN)
-        )
+        Card(SPADES, JACK),
+        Card(HEARTS, TEN),
+        Card(DIAMONDS, NINE),
+        Card(HEARTS, EIGHT),
+        Card(CLUBS, SEVEN)
     )
 
     private val highThreeOfAKind = Hand(
-        listOf(
-            Card(HEARTS, TEN),
-            Card(SPADES, TEN),
-            Card(CLUBS, TEN),
-            Card(DIAMONDS, SIX),
-            Card(HEARTS, SEVEN)
-        )
+        Card(HEARTS, TEN),
+        Card(SPADES, TEN),
+        Card(CLUBS, TEN),
+        Card(DIAMONDS, SIX),
+        Card(HEARTS, SEVEN)
     )
 
     private val lowThreeOfAKind = Hand(
-        listOf(
-            Card(HEARTS, FIVE),
-            Card(SPADES, FIVE),
-            Card(CLUBS, FIVE),
-            Card(DIAMONDS, QUEEN),
-            Card(HEARTS, TWO)
-        )
+        Card(HEARTS, FIVE),
+        Card(SPADES, FIVE),
+        Card(CLUBS, FIVE),
+        Card(DIAMONDS, QUEEN),
+        Card(HEARTS, TWO)
     )
 
     private val equalTwoPairs1 = Hand(
-        listOf(
-            Card(DIAMONDS, ACE),
-            Card(HEARTS, ACE),
-            Card(DIAMONDS, SEVEN),
-            Card(HEARTS, SEVEN),
-            Card(HEARTS, TWO)
-        )
+        Card(DIAMONDS, ACE),
+        Card(HEARTS, ACE),
+        Card(DIAMONDS, SEVEN),
+        Card(HEARTS, SEVEN),
+        Card(HEARTS, TWO)
     )
 
     private val equalTwoPairs2 = Hand(
-        listOf(
-            Card(SPADES, ACE),
-            Card(CLUBS, ACE),
-            Card(SPADES, SEVEN),
-            Card(CLUBS, SEVEN),
-            Card(CLUBS, TWO)
-        )
+        Card(SPADES, ACE),
+        Card(CLUBS, ACE),
+        Card(SPADES, SEVEN),
+        Card(CLUBS, SEVEN),
+        Card(CLUBS, TWO)
     )
 
     private val highTwoPairs = Hand(
-        listOf(
-            Card(SPADES, ACE),
-            Card(CLUBS, ACE),
-            Card(DIAMONDS, SEVEN),
-            Card(HEARTS, SEVEN),
-            Card(HEARTS, TWO)
-        )
+        Card(SPADES, ACE),
+        Card(CLUBS, ACE),
+        Card(DIAMONDS, SEVEN),
+        Card(HEARTS, SEVEN),
+        Card(HEARTS, TWO)
     )
 
     private val lowTwoPairs = Hand(
-        listOf(
-            Card(SPADES, TEN),
-            Card(CLUBS, TEN),
-            Card(HEARTS, EIGHT),
-            Card(DIAMONDS, EIGHT),
-            Card(HEARTS, ACE)
-        )
+        Card(SPADES, TEN),
+        Card(CLUBS, TEN),
+        Card(HEARTS, EIGHT),
+        Card(DIAMONDS, EIGHT),
+        Card(HEARTS, ACE)
     )
 
     private val equalPair1 = Hand(
-        listOf(
-            Card(SPADES, TEN),
-            Card(CLUBS, TEN),
-            Card(DIAMONDS, QUEEN),
-            Card(HEARTS, EIGHT),
-            Card(HEARTS, FIVE)
-        )
+        Card(SPADES, TEN),
+        Card(CLUBS, TEN),
+        Card(DIAMONDS, QUEEN),
+        Card(HEARTS, EIGHT),
+        Card(HEARTS, FIVE)
     )
 
     private val equalPair2 = Hand(
-        listOf(
-            Card(DIAMONDS, TEN),
-            Card(HEARTS, TEN),
-            Card(HEARTS, QUEEN),
-            Card(CLUBS, EIGHT),
-            Card(DIAMONDS, FIVE)
-        )
+        Card(DIAMONDS, TEN),
+        Card(HEARTS, TEN),
+        Card(HEARTS, QUEEN),
+        Card(CLUBS, EIGHT),
+        Card(DIAMONDS, FIVE)
     )
 
     private val highPair = Hand(
-        listOf(
-            Card(SPADES, TEN),
-            Card(CLUBS, TEN),
-            Card(DIAMONDS, SEVEN),
-            Card(HEARTS, KING),
-            Card(HEARTS, SIX)
-        )
+        Card(SPADES, TEN),
+        Card(CLUBS, TEN),
+        Card(DIAMONDS, SEVEN),
+        Card(HEARTS, KING),
+        Card(HEARTS, SIX)
     )
 
     private val lowPair = Hand(
-        listOf(
-            Card(SPADES, FIVE),
-            Card(CLUBS, FIVE),
-            Card(HEARTS, ACE),
-            Card(DIAMONDS, THREE),
-            Card(HEARTS, TWO)
-        )
+        Card(SPADES, FIVE),
+        Card(CLUBS, FIVE),
+        Card(HEARTS, ACE),
+        Card(DIAMONDS, THREE),
+        Card(HEARTS, TWO)
     )
 
     private val equalHighCard1 = Hand(
-        listOf(
-            Card(HEARTS, ACE),
-            Card(SPADES, JACK),
-            Card(DIAMONDS, EIGHT),
-            Card(HEARTS, SEVEN),
-            Card(DIAMONDS, FIVE),
-        )
+        Card(HEARTS, ACE),
+        Card(SPADES, JACK),
+        Card(DIAMONDS, EIGHT),
+        Card(HEARTS, SEVEN),
+        Card(DIAMONDS, FIVE)
     )
 
     private val equalHighCard2 = Hand(
-        listOf(
-            Card(SPADES, ACE),
-            Card(HEARTS, JACK),
-            Card(HEARTS, EIGHT),
-            Card(CLUBS, SEVEN),
-            Card(SPADES, FIVE),
-        )
+        Card(SPADES, ACE),
+        Card(HEARTS, JACK),
+        Card(HEARTS, EIGHT),
+        Card(CLUBS, SEVEN),
+        Card(SPADES, FIVE)
     )
 
     private val highHighCard = Hand(
-        listOf(
-            Card(HEARTS, ACE),
-            Card(SPADES, JACK),
-            Card(DIAMONDS, EIGHT),
-            Card(HEARTS, SEVEN),
-            Card(DIAMONDS, FIVE),
-        )
+        Card(HEARTS, ACE),
+        Card(SPADES, JACK),
+        Card(DIAMONDS, EIGHT),
+        Card(HEARTS, SEVEN),
+        Card(DIAMONDS, FIVE)
     )
 
     private val lowHighCard = Hand(
-        listOf(
-            Card(SPADES, QUEEN),
-            Card(DIAMONDS, NINE),
-            Card(HEARTS, SIX),
-            Card(DIAMONDS, FOUR),
-            Card(HEARTS, THREE)
-        )
+        Card(SPADES, QUEEN),
+        Card(DIAMONDS, NINE),
+        Card(HEARTS, SIX),
+        Card(DIAMONDS, FOUR),
+        Card(HEARTS, THREE)
     )
 
     @Test
@@ -378,4 +321,5 @@ class HandTest {
         assertEquals(equalHighCard1, equalHighCard2)
         assertTrue(highHighCard > lowHighCard)
     }
+
 }

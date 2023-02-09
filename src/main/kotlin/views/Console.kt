@@ -20,9 +20,8 @@ private fun display(hands: List<Hand>){
 
 private fun display(hand: Hand){
     print("--> ")
-    println(HANDS.find { it.second == hand.score }?.first)
     println()
-    for (card in hand.cardsInHand.sortedDescending())
+    for (card in hand.cards.sortedDescending())
         println(card.rank.first + " of " + card.suit)
     println()
 }
